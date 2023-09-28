@@ -1,0 +1,338 @@
+-------------------- Log Start | Wed Sep 27 23:05:27 2023 --------------------
+data_path: /home/pi/printer_data
+is_default_data_path: False
+config_file: /home/pi/printer_data/config/moonraker.conf
+startup_warnings: []
+verbose: False
+debug: False
+asyncio_debug: False
+is_backup_config: False
+is_python_package: False
+instance_uuid: a72aa173c1c8407fbec480bf7acafc4a
+unix_socket_path: /home/pi/printer_data/comms/moonraker.sock
+software_version: v0.8.0-142-gee62d07
+git_branch: master
+git_remote: origin
+git_repo_url: https://github.com/Arksine/moonraker.git
+modified_files: []
+unofficial_components: []
+log_file: /home/pi/printer_data/logs/moonraker.log
+python_version: 3.9.2 (default, Mar 12 2021, 04:06:34)  [GCC 10.2.1 20210110]
+
+#################### Moonraker Configuration ####################
+
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /home/pi/printer_data/comms/klippy.sock
+
+[authorization]
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+cors_domains = 
+	*.lan
+	*.local
+	*://localhost
+	*://localhost:*
+	*://my.mainsail.xyz
+	*://app.fluidd.xyz
+
+[octoprint_compat]
+
+[history]
+
+[update_manager]
+channel = dev
+refresh_interval = 168
+
+[update_manager fluidd-config]
+type = git_repo
+primary_branch = master
+path = ~/fluidd-config
+origin = https://github.com/fluidd-core/fluidd-config.git
+managed_services = klipper
+
+[update_manager fluidd]
+type = web
+channel = stable
+repo = fluidd-core/fluidd
+path = ~/fluidd
+
+[update_manager mobileraker]
+type = git_repo
+path = /home/pi/mobileraker_companion
+origin = https://github.com/Clon1998/mobileraker_companion.git
+primary_branch = main
+managed_services = mobileraker
+env = /home/pi/mobileraker-env/bin/python
+requirements = scripts/mobileraker-requirements.txt
+install_script = scripts/install-mobileraker-companion.sh
+
+#################################################################
+All Configuration Files:
+/home/pi/printer_data/config/moonraker.conf
+#################################################################
+Unsafe Shutdown Count: 4
+
+System Info:
+
+***python***
+  version: sys.version_info(major=3, minor=9, micro=2, releaselevel='final', serial=0)
+  version_string: 3.9.2 (default, Mar 12 2021, 04:06:34)  [GCC 10.2.1 20210110]
+
+***cpu_info***
+  cpu_count: 4
+  bits: 32bit
+  processor: armv7l
+  cpu_desc: ARMv7 Processor rev 4 (v7l)
+  serial_number: dc77c7e9
+  hardware_desc: BCM2835
+  model: Raspberry Pi 3 Model B Rev 1.2
+  total_memory: 944092
+  memory_units: kB
+
+***sd_info***
+  manufacturer_id: 03
+  manufacturer: Sandisk
+  oem_id: 5344
+  product_name: SD32G
+  product_revision: 8.5
+  serial_number: 53e7b925
+  manufacturer_date: 9/2022
+  capacity: 29.7 GiB
+  total_bytes: 31914983424
+
+***distribution***
+  name: Raspbian GNU/Linux 11 (bullseye)
+  id: raspbian
+  version: 11
+  version_parts: {'major': '11', 'minor': '', 'build_number': ''}
+  like: debian
+  codename: bullseye
+  release_info: {}
+
+***virtualization***
+  virt_type: none
+  virt_identifier: none
+
+***network***
+
+***canbus***
+
+***Allowed Services***
+  klipper_mcu
+  webcamd
+  MoonCord
+  KlipperScreen
+  moonraker-telegram-bot
+  moonraker-obico
+  sonar
+  crowsnest
+  octoeverywhere
+  ratos-configurator
+  mobileraker
+
+Systemd unit moonraker.service:
+unit_name: moonraker.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['-.mount', 'sysinit.target', 'network-online.target', 'system.slice']
+**After=['-.mount', 'systemd-journald.socket', 'sysinit.target', 'network-online.target', 'basic.target', 'system.slice']
+**SupplementaryGroups=['moonraker-admin']
+**EnvironmentFiles=/home/pi/printer_data/systemd/moonraker.env
+**ExecStart=/home/pi/moonraker-env/bin/python $MOONRAKER_ARGS
+**WorkingDirectory=/home/pi/moonraker
+**FragmentPath=/etc/systemd/system/moonraker.service
+**Description=API Server for Klipper SV1
+**User=pi
+
+Systemd unit klipper.service:
+unit_name: klipper.service
+is_default: True
+manager: systemd
+Properties:
+**Requires=['-.mount', 'sysinit.target', 'system.slice']
+**After=['-.mount', 'systemd-journald.socket', 'sysinit.target', 'network-online.target', 'basic.target', 'system.slice']
+**SupplementaryGroups=[]
+**EnvironmentFiles=/home/pi/printer_data/systemd/klipper.env
+**ExecStart=/home/pi/klippy-env/bin/python $KLIPPER_ARGS
+**WorkingDirectory=/home/pi/klipper
+**FragmentPath=/etc/systemd/system/klipper.service
+**Description=Klipper 3D Printer Firmware SV1
+**User=pi
+Git Repo moonraker: No warnings detected
+Git Repo klipper: No warnings detected
+Git Repo fluidd-config: No warnings detected
+Git Repo mobileraker: No warnings detected
+Klipper Version: v0.11.0-276-ge9bf2d4c
+2023-09-28 00:05:27,454 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.180
+2023-09-28 00:06:04,760 [app.py:prepare()] - Upload Request Received from 192.168.1.180
+2023-09-28 00:06:04,780 [app.py:prepare()] - Upload Request Received from 192.168.1.180
+2023-09-28 00:06:04,802 [app.py:post()] - Processing Uploaded File: printer.cfg
+2023-09-28 00:06:04,815 [app.py:log_request()] - 201 POST /server/files/upload (192.168.1.180) [_TRUSTED_USER_] 38.83ms
+2023-09-28 00:06:06,091 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2023-09-28 00:06:06,141 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2023-09-28 00:06:07,357 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2023-09-28 00:06:10,145 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2023-09-28 00:06:10,149 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2023-09-28 00:06:10,397 [job_state.py:_handle_started()] - Job state initialized: standby
+2023-09-28 00:06:10,676 [klippy_connection.py:_check_ready()] - Klippy ready
+2023-09-28 00:06:11,150 [data_store.py:_init_sensors()] - Configuring available sensors: ['heater_bed', 'temperature_sensor pi_3_mcu', 'temperature_sensor skr_pico_mcu', 'temperature_sensor picobilical_mcu', 'temperature_sensor chamber_temp', 'extruder']
+2023-09-28 00:06:57,781 [job_state.py:_status_update()] - Job Started: Voron_Design_Cube_v7_PLA_35m36s.gcode
+2023-09-28 00:08:26,537 [job_state.py:_status_update()] - Job Started: Voron_Design_Cube_v7_PLA_35m36s.gcode
+2023-09-28 00:12:24,324 [job_state.py:_status_update()] - Job Started: Voron_Design_Cube_v7_PLA_35m36s.gcode
+2023-09-28 00:14:08,449 [klippy_connection.py:_process_status_update()] - Klippy has shutdown
+2023-09-28 00:14:08,459 [proc_stats.py:_handle_shutdown()] - 
+Moonraker System Usage Statistics:
+System Time: 1695856418.871184, Usage: 8.19%, Memory: 28316 kB
+System Time: 1695856419.870125, Usage: 4.8%, Memory: 28316 kB
+System Time: 1695856420.870069, Usage: 4.84%, Memory: 28316 kB
+System Time: 1695856421.871510, Usage: 4.43%, Memory: 28316 kB
+System Time: 1695856422.872772, Usage: 3.48%, Memory: 28316 kB
+System Time: 1695856423.875373, Usage: 3.9%, Memory: 28316 kB
+System Time: 1695856424.878235, Usage: 3.88%, Memory: 28316 kB
+System Time: 1695856425.878126, Usage: 3.93%, Memory: 28316 kB
+System Time: 1695856426.880226, Usage: 3.89%, Memory: 28316 kB
+System Time: 1695856427.881704, Usage: 3.52%, Memory: 28316 kB
+System Time: 1695856428.883230, Usage: 7.1%, Memory: 28316 kB
+System Time: 1695856429.883045, Usage: 3.82%, Memory: 28316 kB
+System Time: 1695856430.885726, Usage: 4.15%, Memory: 28316 kB
+System Time: 1695856431.885612, Usage: 7.92%, Memory: 28316 kB
+System Time: 1695856432.885998, Usage: 3.71%, Memory: 28316 kB
+System Time: 1695856433.886304, Usage: 3.8%, Memory: 28316 kB
+System Time: 1695856434.887679, Usage: 5.63%, Memory: 28316 kB
+System Time: 1695856435.888243, Usage: 5.48%, Memory: 28316 kB
+System Time: 1695856436.889599, Usage: 3.76%, Memory: 28316 kB
+System Time: 1695856437.887557, Usage: 9.03%, Memory: 28316 kB
+System Time: 1695856438.891248, Usage: 5.25%, Memory: 28316 kB
+System Time: 1695856439.893203, Usage: 3.5%, Memory: 28316 kB
+System Time: 1695856440.895305, Usage: 3.55%, Memory: 28316 kB
+System Time: 1695856441.897247, Usage: 3.86%, Memory: 28316 kB
+System Time: 1695856442.898686, Usage: 3.52%, Memory: 28316 kB
+System Time: 1695856443.898993, Usage: 4.02%, Memory: 28316 kB
+System Time: 1695856444.900648, Usage: 3.86%, Memory: 28316 kB
+System Time: 1695856445.901772, Usage: 6.67%, Memory: 28320 kB
+System Time: 1695856446.903006, Usage: 3.72%, Memory: 28320 kB
+System Time: 1695856447.904107, Usage: 3.44%, Memory: 28320 kB
+CPU Temperature: 37.552
+2023-09-28 00:14:08,479 [proc_stats.py:_handle_shutdown()] - Throttled Flags: 
+2023-09-28 00:14:12,414 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2023-09-28 00:14:12,575 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2023-09-28 00:14:13,682 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2023-09-28 00:14:16,480 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2023-09-28 00:14:16,483 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2023-09-28 00:14:16,731 [job_state.py:_handle_started()] - Job state initialized: standby
+2023-09-28 00:14:17,004 [klippy_connection.py:_check_ready()] - Klippy ready
+2023-09-28 00:14:17,483 [data_store.py:_init_sensors()] - Configuring available sensors: ['heater_bed', 'temperature_sensor pi_3_mcu', 'temperature_sensor skr_pico_mcu', 'temperature_sensor picobilical_mcu', 'temperature_sensor chamber_temp', 'extruder']
+2023-09-28 00:15:22,013 [app.py:prepare()] - Upload Request Received from 192.168.1.180
+2023-09-28 00:15:22,037 [app.py:prepare()] - Upload Request Received from 192.168.1.180
+2023-09-28 00:15:22,055 [app.py:post()] - Processing Uploaded File: printer.cfg
+2023-09-28 00:15:22,068 [app.py:log_request()] - 201 POST /server/files/upload (192.168.1.180) [_TRUSTED_USER_] 33.88ms
+2023-09-28 00:15:23,248 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2023-09-28 00:15:23,304 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2023-09-28 00:15:24,516 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2023-09-28 00:15:27,339 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2023-09-28 00:15:27,343 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2023-09-28 00:15:27,591 [job_state.py:_handle_started()] - Job state initialized: standby
+2023-09-28 00:15:27,867 [klippy_connection.py:_check_ready()] - Klippy ready
+2023-09-28 00:15:28,342 [data_store.py:_init_sensors()] - Configuring available sensors: ['heater_bed', 'temperature_sensor pi_3_mcu', 'temperature_sensor skr_pico_mcu', 'temperature_sensor picobilical_mcu', 'temperature_sensor chamber_temp', 'extruder']
+2023-09-28 00:16:15,021 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.gcode.script, Code: 400, Message: {'error': 'WebRequestError', 'message': 'Must home axis first: 0.000 0.000 5.000 [0.000]'}
+2023-09-28 00:19:19,534 [job_state.py:_status_update()] - Job Started: Voron_Design_Cube_v7_PLA_35m36s.gcode
+2023-09-28 00:23:20,042 [job_state.py:_status_update()] - Job Started: Voron_Design_Cube_v7_PLA_35m36s.gcode
+2023-09-28 00:25:39,972 [klippy_connection.py:_on_connection_closed()] - Klippy Connection Removed
+2023-09-28 00:25:40,322 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: printer.info, Code: 503, Message: Klippy Host not connected
+2023-09-28 00:25:41,239 [klippy_connection.py:_do_connect()] - Klippy Connection Established
+2023-09-28 00:25:44,044 [klippy_connection.py:_request_initial_subscriptions()] - Webhooks Subscribed
+2023-09-28 00:25:44,047 [klippy_connection.py:_request_initial_subscriptions()] - GCode Output Subscribed
+2023-09-28 00:25:44,295 [job_state.py:_handle_started()] - Job state initialized: standby
+2023-09-28 00:25:44,573 [klippy_connection.py:_check_ready()] - Klippy ready
+2023-09-28 00:25:45,047 [data_store.py:_init_sensors()] - Configuring available sensors: ['heater_bed', 'temperature_sensor pi_3_mcu', 'temperature_sensor skr_pico_mcu', 'temperature_sensor picobilical_mcu', 'temperature_sensor chamber_temp', 'extruder']
+2023-09-28 00:26:47,435 [app.py:log_request()] - 404 GET /server/database/item?namespace=webcams (192.168.1.180) [_TRUSTED_USER_] 8.91ms
+2023-09-28 00:26:47,871 [app.py:log_request()] - 101 GET /websocket?token=LT7P2XOQ3OOSOF6F4RKR2RGPRV6QESNW (192.168.1.180) [_TRUSTED_USER_] 4.96ms
+2023-09-28 00:26:47,872 [websockets.py:open()] - Websocket Opened: ID: 1717284000, Proxied: False, User Agent: BBL-Slicer/v01.07.04.52 (dark) Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52, Host Name: 192.168.1.226
+2023-09-28 00:26:47,899 [websockets.py:_handle_identify()] - Websocket 1717284000 Client Identified - Name: fluidd, Version: 1.25.3-26d94c8, Type: web
+2023-09-28 00:26:47,900 [file_manager.py:get_file_list()] - Updating File List <config>...
+2023-09-28 00:27:34,132 [websockets.py:on_close()] - Websocket Closed: ID: 1717284000 Close Code: 1001, Close Reason: None, Pong Time Elapsed: 6.24
+2023-09-28 00:27:34,842 [app.py:log_request()] - 404 GET /server/database/item?namespace=webcams (192.168.1.180) [_TRUSTED_USER_] 7.75ms
+2023-09-28 00:27:35,124 [app.py:log_request()] - 101 GET /websocket?token=ZQSCW5WZ6LUHY44WJZ6NMEBEGFAWO3IJ (192.168.1.180) [_TRUSTED_USER_] 5.66ms
+2023-09-28 00:27:35,125 [websockets.py:open()] - Websocket Opened: ID: 1717261528, Proxied: False, User Agent: BBL-Slicer/v01.07.04.52 (dark) Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52, Host Name: 192.168.1.226
+2023-09-28 00:27:35,139 [websockets.py:_handle_identify()] - Websocket 1717261528 Client Identified - Name: fluidd, Version: 1.25.3-26d94c8, Type: web
+2023-09-28 00:27:35,141 [file_manager.py:get_file_list()] - Updating File List <config>...
+2023-09-28 00:27:39,570 [websockets.py:on_close()] - Websocket Closed: ID: 1717261528 Close Code: 1001, Close Reason: None, Pong Time Elapsed: 4.45
+2023-09-28 00:27:39,901 [app.py:log_request()] - 404 GET /server/database/item?namespace=webcams (192.168.1.180) [_TRUSTED_USER_] 9.26ms
+2023-09-28 00:27:40,140 [app.py:log_request()] - 101 GET /websocket?token=6LY2XWGND4VMN6NZXUJLS2GT4RHFL6IQ (192.168.1.180) [_TRUSTED_USER_] 5.76ms
+2023-09-28 00:27:40,141 [websockets.py:open()] - Websocket Opened: ID: 1719344024, Proxied: False, User Agent: BBL-Slicer/v01.07.04.52 (dark) Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52, Host Name: 192.168.1.226
+2023-09-28 00:27:40,155 [websockets.py:_handle_identify()] - Websocket 1719344024 Client Identified - Name: fluidd, Version: 1.25.3-26d94c8, Type: web
+2023-09-28 00:27:40,156 [file_manager.py:get_file_list()] - Updating File List <config>...
+2023-09-28 00:30:22,587 [app.py:prepare()] - Upload Request Received from 192.168.1.180
+2023-09-28 00:30:23,684 [app.py:post()] - Processing Uploaded File: Voron_Design_Cube_v7_PLA_35m42s.gcode
+2023-09-28 00:30:24,077 [shell_command.py:pipe_data_received()] - INFO:metadata:Object Processing is disabled
+
+2023-09-28 00:30:24,302 [shell_command.py:_check_proc_success()] - Command (/home/pi/moonraker-env/bin/python /home/pi/moonraker/moonraker/components/file_manager/metadata.py -p /home/pi/printer_data/gcodes -f "Voron_Design_Cube_v7_PLA_35m42s.gcode") successfully finished
+2023-09-28 00:30:24,308 [app.py:log_request()] - 201 POST /api/files/local (192.168.1.180) [_TRUSTED_USER_] 1723.85ms
+2023-09-28 00:30:36,011 [job_state.py:_status_update()] - Job Started: Voron_Design_Cube_v7_PLA_35m42s.gcode
+2023-09-28 00:31:42,504 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 60.00 seconds
+2023-09-28 00:31:56,454 [websockets.py:on_close()] - Websocket Closed: ID: 1719344024 Close Code: 1001, Close Reason: None, Pong Time Elapsed: 6.30
+2023-09-28 00:32:51,178 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:33:21,274 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:33:51,368 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:34:21,209 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:34:51,401 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:35:21,152 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:35:51,244 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:36:21,332 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:36:51,168 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:37:21,271 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:37:51,368 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:38:21,209 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:38:51,342 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:39:21,376 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:39:51,225 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:40:21,313 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:40:51,166 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:41:21,246 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:41:51,345 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:42:21,202 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:42:51,275 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:43:21,369 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:43:51,217 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:43:51,867 [app.py:prepare()] - Upload Request Received from 192.168.1.180
+2023-09-28 00:43:52,486 [app.py:post()] - Processing Uploaded File: Voron_Design_Cube_v7_0.2mm_PLA_Voron_v0_120_1h7m.gcode
+2023-09-28 00:43:52,874 [shell_command.py:pipe_data_received()] - INFO:metadata:Object Processing is disabled
+
+2023-09-28 00:43:53,143 [shell_command.py:_check_proc_success()] - Command (/home/pi/moonraker-env/bin/python /home/pi/moonraker/moonraker/components/file_manager/metadata.py -p /home/pi/printer_data/gcodes -f "Voron_Design_Cube_v7_0.2mm_PLA_Voron_v0_120_1h7m.gcode") successfully finished
+2023-09-28 00:43:53,149 [app.py:log_request()] - 201 POST /server/files/upload (192.168.1.180) [_TRUSTED_USER_] 1283.72ms
+2023-09-28 00:44:21,314 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:44:51,151 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:45:22,275 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:45:52,349 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:46:22,189 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:46:52,276 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:47:22,361 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:47:52,209 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:48:06,565 [app.py:prepare()] - Upload Request Received from 192.168.1.180
+2023-09-28 00:48:07,839 [app.py:post()] - Processing Uploaded File: Voron_Design_Cube_v7.gcode
+2023-09-28 00:48:08,205 [shell_command.py:pipe_data_received()] - INFO:metadata:Object Processing is disabled
+
+2023-09-28 00:48:08,477 [shell_command.py:_check_proc_success()] - Command (/home/pi/moonraker-env/bin/python /home/pi/moonraker/moonraker/components/file_manager/metadata.py -p /home/pi/printer_data/gcodes -f "Voron_Design_Cube_v7.gcode") successfully finished
+2023-09-28 00:48:08,483 [app.py:log_request()] - 201 POST /api/files/local (192.168.1.180) [_TRUSTED_USER_] 1920.50ms
+2023-09-28 00:48:22,300 [common.py:build_error()] - JSON-RPC Request Error - Requested Method: server.files.metadata, Code: -32601, Message: Metadata not available for <Voron_Design_Cube_v7_PLA_35m42s.gcode>
+2023-09-28 00:48:26,797 [job_state.py:_status_update()] - Job Started: Voron_Design_Cube_v7.gcode
+2023-09-28 00:49:38,184 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 60.00 seconds
+2023-09-28 00:49:52,458 [klippy_connection.py:wait()] - Request 'pause_resume/cancel' pending: 60.00 seconds
+2023-09-28 00:49:56,647 [klippy_connection.py:wait()] - Request 'gcode/script' pending: 60.00 seconds
+2023-09-28 01:48:52,422 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.180
+2023-09-28 02:32:49,446 [websockets.py:on_close()] - Websocket Closed: ID: 1719070144 Close Code: None, Close Reason: None, Pong Time Elapsed: 4.08
+2023-09-28 13:56:11,898 [authorization.py:_check_trusted_connection()] - Trusted Connection Detected, IP: 192.168.1.180
+2023-09-28 13:56:12,899 [app.py:log_request()] - 101 GET /websocket?token=TNYNXU4FIM6QQJN3SBWGLWWGIDU4Z3OD (192.168.1.180) [_TRUSTED_USER_] 5.60ms
+2023-09-28 13:56:12,900 [websockets.py:open()] - Websocket Opened: ID: 1717284624, Proxied: False, User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36, Host Name: 192.168.1.226
+2023-09-28 13:56:13,154 [websockets.py:_handle_identify()] - Websocket 1717284624 Client Identified - Name: fluidd, Version: 1.25.3-26d94c8, Type: web
+2023-09-28 13:56:13,155 [file_manager.py:get_file_list()] - Updating File List <config>...
+2023-09-28 14:58:52,630 [authorization.py:_prune_conn_handler()] - Trusted Connection Expired, IP: 192.168.1.180
